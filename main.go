@@ -6,6 +6,8 @@ import (
 	"os"
 	"strconv"
 
+	"./sections"
+
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
 
@@ -68,7 +70,7 @@ var lettermapping = map[int]string{
  */
 func RawScoreSection(wrkbook *excelize.File, cursheet string) {
 	//setup section with repeatables
-	Headings(wrkbook, 2, true, cursheet)
+	sections.Headings(wrkbook, 2, true, cursheet)
 	Matchups(wrkbook, 2, cursheet)
 	WeightedSum(wrkbook, 2, false, cursheet)
 	ScoreVsMean(wrkbook, 2, false, cursheet)
