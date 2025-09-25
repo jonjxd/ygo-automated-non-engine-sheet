@@ -44,3 +44,7 @@ var lettermapping = map[int]string{
 	40: "AO",
 	41: "AP",
 }
+
+func GetLettermapping() map[int]string {
+	return lettermapping
+}
