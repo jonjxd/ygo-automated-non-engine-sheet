@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"./sections"
+	"github.com/destroyer-ii/defensive-cards-prep.git/sections"
 
 	"github.com/360EntSecGroup-Skylar/excelize"
 )

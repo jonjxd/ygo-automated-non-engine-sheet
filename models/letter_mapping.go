@@ -1,4 +1,4 @@
-package sections
+package models
 
 var lettermapping = map[int]string{
 	0:  "A",
