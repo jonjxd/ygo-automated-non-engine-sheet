@@ -4,13 +4,17 @@ import (
 	"strconv"
 
 	"github.com/360EntSecGroup-Skylar/excelize"
+	"github.com/destroyer-ii/defensive-cards-prep.git/models"
 )
 
 //---------------------------------------------------------------------------------
 // HELPER FUNCTIONS
 //---------------------------------------------------------------------------------
 
-func Headings(wrkbook *excelize.File, row int, cardnames []string, decknames []string, start bool, cursheet string) {
+func Headings(wrkbook *excelize.File, row int, start bool, cursheet string, cardnames []string, decknames []string) {
+	// get letter mapping
+	var lettermapping = models.GetLettermapping()
+
 	//start from E, go to end of thing
 	curcell := ""
 	i := 0
@@ -28,7 +32,7 @@ func Headings(wrkbook *excelize.File, row int, cardnames []string, decknames []s
 	}
 }
 
-func Matchups(wrkbook *excelize.File, row int, cardnames []string, decknames []string, cursheet string) {
+func Matchups(wrkbook *excelize.File, row int, cursheet string, cardnames []string, decknames []string) {
 	//set up matchups in B column
 	wrkbook.SetCellValue(cursheet, "B"+strconv.Itoa(row), "Matchup")
 	//setup bold style
@@ -45,7 +49,10 @@ func Matchups(wrkbook *excelize.File, row int, cardnames []string, decknames []s
 
 }
 
-func SetStandardFormulas(wrkbook *excelize.File, row int, cardnames []string, decknames []string, cursheet string) {
+func SetStandardFormulas(wrkbook *excelize.File, row int, cursheet string, cardnames []string, decknames []string) {
+	// get letter mapping
+	var lettermapping = models.GetLettermapping()
+
 	//setup number format
 	numstyle, err := wrkbook.NewStyle(`{"custom_number_format": "0.0000_ "}`)
 	//separate counter for looping through formula
@@ -67,7 +74,10 @@ func SetStandardFormulas(wrkbook *excelize.File, row int, cardnames []string, de
 	}
 }
 
-func WeightedSum(wrkbook *excelize.File, row int, cardnames []string, decknames []string, space bool, cursheet string) {
+func WeightedSum(wrkbook *excelize.File, row int, space bool, cursheet string, cardnames []string, decknames []string) {
+	// get letter mapping
+	var lettermapping = models.GetLettermapping()
+
 	thisrow := 0
 	if !space {
 		thisrow = row + len(decknames) + 1
@@ -92,7 +102,10 @@ func WeightedSum(wrkbook *excelize.File, row int, cardnames []string, decknames 
 	}
 }
 
-func ScoreVsMean(wrkbook *excelize.File, row int, cardnames []string, decknames []string, space bool, cursheet string) {
+func ScoreVsMean(wrkbook *excelize.File, row int, space bool, cursheet string, cardnames []string, decknames []string) {
+	// get letter mapping
+	var lettermapping = models.GetLettermapping()
+
 	//setup number format
 	numstyle, err := wrkbook.NewStyle(`{"custom_number_format": "0.0000_ "}`)
 	//recalculate row to correct place
@@ -126,7 +139,7 @@ func ScoreVsMean(wrkbook *excelize.File, row int, cardnames []string, decknames 
 
 }
 
-func Frequency(wrkbook *excelize.File, row int, cardnames []string, decknames []string, cursheet string) {
+func Frequency(wrkbook *excelize.File, row int, cursheet string, cardnames []string, decknames []string) {
 	//setup number format
 	numstyle, err := wrkbook.NewStyle(`{"custom_number_format": "0.0000_ "}`)
 	//set Total Number of Decks
